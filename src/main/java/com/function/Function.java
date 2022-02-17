@@ -22,7 +22,7 @@ public class Function {
         final String name = "Function OK!";
 
         return request.createResponseBuilder(HttpStatus.OK)
-                .body("{\n    status: " + name + "\n}")
+                .body("{\n    status: " + name + "\n }")
                 .build();
     }
 }

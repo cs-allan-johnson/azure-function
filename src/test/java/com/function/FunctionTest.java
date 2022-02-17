@@ -46,7 +46,12 @@ public class FunctionTest {
         // Invoke
         final HttpResponseMessage ret = new Function().run(req, context);
 
+        @SuppressWarnings("unchecked")
+        final OutputBinding<String> msg = (OutputBinding<String>) mock(OutputBinding.class);
+        final HttpResponseMessage queue = new Queue().run(req, msg, context);
+
         // Verify
         assertEquals(ret.getStatus(), HttpStatus.OK);
+        assertEquals(queue.getStatus(), HttpStatus.OK);
     }
 }
