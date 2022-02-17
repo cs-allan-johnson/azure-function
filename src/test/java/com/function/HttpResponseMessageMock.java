@@ -49,22 +49,14 @@ public class HttpResponseMessageMock implements HttpResponseMessage {
         private HttpStatusType httpStatus;
 
         public Builder status(HttpStatus status) {
-            this.setHttpStatusCode(status.value());
+            this.httpStatusCode = status.value();
             this.httpStatus = status;
             return this;
         }
 
-        public int getHttpStatusCode() {
-            return httpStatusCode;
-        }
-
-        public void setHttpStatusCode(int httpStatusCode) {
-            this.httpStatusCode = httpStatusCode;
-        }
-
         @Override
         public Builder status(HttpStatusType httpStatusType) {
-            this.setHttpStatusCode(httpStatusType.value());
+            this.httpStatusCode = httpStatusType.value();
             this.httpStatus = httpStatusType;
             return this;
         }

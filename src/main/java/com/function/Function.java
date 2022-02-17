@@ -11,28 +11,18 @@ import com.microsoft.azure.functions.annotation.HttpTrigger;
 
 import java.util.Optional;
 
-/**
- * Azure Functions with HTTP Trigger.
- */
 public class Function {
-    @FunctionName("HttpExample")
+    @FunctionName("health")
     public HttpResponseMessage run(
-            @HttpTrigger(name = "req", methods = { HttpMethod.GET,
-                    HttpMethod.POST }, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> request,
+            @HttpTrigger(name = "req", methods = {
+                    HttpMethod.GET }, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> request,
             final ExecutionContext context) {
         context.getLogger().info("Java HTTP trigger processed a request.");
 
-        // Parse query parameter
-        final String query = request.getQueryParameters().get("data");
-        final String data = request.getBody().orElse(query);
+        final String name = "Function OK!";
 
-        if (data == null) {
-            return request.createResponseBuilder(HttpStatus.BAD_REQUEST)
-                    .body("Please pass a data on the query string or in the request body").build();
-        } else {
-            return request.createResponseBuilder(HttpStatus.OK)
-                    .body("{\n    data\": " + data + "\n    message: OK \n" + "}")
-                    .build();
-        }
+        return request.createResponseBuilder(HttpStatus.OK)
+                .body("{\n    status: " + name + "\n}")
+                .build();
     }
 }
